@@ -19,7 +19,7 @@ int gx, gy; // 終點座標
 
 int d[MAX_N][MAX_M]; // 到各個位置的最短距離的數組
 
-// 4 個方向的移動向量
+// 4 個方向的移動向量 右上左下
 int dx[4] = {1, 0, -1, 0}, dy[4] = {0, 1, 0 ,-1};
 
 // 求從 (sx, sy) 到 (gx, gy) 的最短距離
@@ -63,7 +63,7 @@ int bfs()
                 // 可以移動的話，則加入隊列，並且到該位置的距離確定為到 p 的距離 +1
                 que.push(P(nx, ny));
                 d[nx][ny] = d[p.first][p.second] + 1;
-            }   
+            }
         }
     }
     return d[gx][gy];
@@ -75,7 +75,17 @@ int main(int argc, char const *argv[])
     {
         for (int j = 0; j < M; j++)
         {
-            scanf("%c", &d[i][j]);
+            scanf("%c", &maze[i][j]);
+            if(maze[i][j] == 'S')
+            {
+                sx = i;
+                sy = j;
+            }
+            else if (maze[i][j] == 'G')
+            {
+                gx = i;
+                gy = j;
+            }
         }
     }
     
